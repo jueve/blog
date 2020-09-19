@@ -1,13 +1,17 @@
 import React from "react";
 import { HomeHeader } from "../../components/HomeHeader";
 
+
 export default function Index(): JSX.Element {
   return (
     <div>
       <HomeHeader />
       <div className="mb-10">
-        <h2 className="text-2xl">Me</h2>
-        <ul className="list-disc">
+        <div className="flex">
+          <div className="mt-3 rounded-full h-3 w-3 bg-gray-600 mr-1" />
+          <h2 className="text-2xl border-gray-600">Me</h2>
+        </div>
+        <ul>
           <li>
             <a className="underline text-blue-600" href="https://github.com/jueve">
               GitHub
@@ -22,8 +26,11 @@ export default function Index(): JSX.Element {
       </div>
 
       <div className="mb-10">
-        <h2 className="text-2xl">Skills</h2>
-        <ul className="list-disc">
+        <div className="flex">
+          <div className="mt-3 rounded-full h-3 w-3 bg-gray-600 mr-1" />
+          <h2 className="text-2xl border-gray-600">Skills</h2>
+        </div>
+        <ul>
           <li className="mb-3">
             <div>
               <h3 className="text-lg">JavaScript</h3>
@@ -40,9 +47,12 @@ export default function Index(): JSX.Element {
       </div>
 
       <div className="mb-10">
-        <h2 className="text-2xl">Works</h2>
-        <ul className="list-disc">
-          <li className="mb-3">
+        <div className="flex">
+          <div className="mt-3 rounded-full h-3 w-3 bg-gray-600 mr-1" />
+          <h2 className="text-2xl border-gray-600">Works</h2>
+        </div>
+        <ul>
+          <li className="mb-4">
             <div>
               <h3 className="text-lg">
                 <a className="underline text-blue-600" href="https://github.com/jueve/atcoder-review">
@@ -54,7 +64,7 @@ export default function Index(): JSX.Element {
               </p>
             </div>
           </li>
-          <li className="mb-3">
+          <li className="mb-4">
             <h3 className="text-lg">
               <a className="underline text-blue-600" href="https://github.com/jueve/iris">
                 IRIS
@@ -69,8 +79,11 @@ export default function Index(): JSX.Element {
       </div>
 
       <div className="mb-10">
-        <h2 className="text-2xl">Certifications</h2>
-        <ul className="list-disc">
+        <div className="flex">
+          <div className="mt-3 rounded-full h-3 w-3 bg-gray-600 mr-1" />
+          <h2 className="text-2xl border-gray-600">Certifications</h2>
+        </div>
+        <ul>
           <li>
             <a className="underline text-blue-600" href="https://atcoder.jp/users/cashitsuki">
               AtCoder茶色
