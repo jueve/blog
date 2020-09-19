@@ -5,10 +5,12 @@ import Runtime from "./runtime.mdx"
 import Conclusion from "./conclusion.mdx"
 import History from "./history.mdx"
 import { ArticleHeader } from "../../components/ArticleHeader";
+import { Share } from "../../components/Share";
 
 <ArticleHeader {...headerInfo} />
 <Introduction />
 <Syntax />
 <Runtime />
 <Conclusion />
+<Share {... headerInfo} />
 <History />

@@ -5,6 +5,7 @@ import Setup from "./setup.mdx";
 import Build from "./build.mdx";
 import Others from "./others.mdx";
 import { ArticleHeader } from "../../components/ArticleHeader";
+import { Share } from "../../components/Share";
 
 <ArticleHeader {...headerInfo} />
 <Introduction />
@@ -12,6 +13,7 @@ import { ArticleHeader } from "../../components/ArticleHeader";
 <Setup />
 <Build />
 <Others />
+<Share {... headerInfo}/>
 
  
 
