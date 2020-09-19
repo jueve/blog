@@ -24,7 +24,7 @@ ECMAScriptで書かれたソースコードのテキストはUnicodeのコード
 
 の4つで構成された列に変換される。これら4つは**input element**と呼ばれ、テキストを左から右に読み取りながら次のinput elementが続く限り、できるだけ長い列に変換される。
 
-この変換には[**lexical grammar**](https://www.ecma-international.org/ecma-262/#sec-syntactic-and-lexical-grammars)という文法が使われる。ECMAScriptの仕様書にはいくつかの文法が定められているがlexical grammarはその1つ。lexical grammarはContext-Free Grammarで表記されていて`左辺::右辺`の形式を取る。例えば`InputElementDiv`は以下のように表す。
+この変換には[**lexical grammar**](https://www.ecma-international.org/ecma-262/#sec-lexical-and-regexp-grammars)という文法が使われる。ECMAScriptの仕様書にはいくつかの文法が定められているがlexical grammarはその1つ。lexical grammarはContext-Free Grammarで表記されていて`左辺::右辺`の形式を取る。例えば`InputElementDiv`は以下のように表す。
 
 ```
 InputElementDiv::
