@@ -7,7 +7,7 @@ export const codeBlock = {
     const className = props.children.props.className || "";
     const matches = className.match(/language-(?<lang>.*)/);
     return (
-      <div className="overflow-x-auto">
+      <div className="code-preview">
         <div>
           <Highlight
             {...defaultProps}
