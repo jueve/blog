@@ -3,10 +3,9 @@ import "../styles/markdown.css";
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { codeBlock } from "../components/CodeBlock";
-import { AppProps } from "next/app";
 
 // eslint-disable-next-line react/prop-types
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }) {
   return (
     <div id="wrapper" className="container mx-auto">
       <div id="inner">
