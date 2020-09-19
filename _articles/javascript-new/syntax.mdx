@@ -1,0 +1,216 @@
+import { ImageWithCaption } from "../../components/ImageWithCaption"
+const imageDir = "/assets/blog/javascript-new";
+const category = {
+  src: `${imageDir}/category.png`,
+  alt: "IdentifierName、keywords、reserved wordsの関係",
+  caption: "IdentifierName、keywords、reserved wordsの関係",
+};
+const tree = {
+  src: `${imageDir}/tree.png`,
+  alt: "syntactic grammarと実際のコードの関係",
+  caption: "syntactic grammarと実際のコードの関係",
+};
+
+## 表記編
+「`new`は予約語なので変数名には使えない」と技術書に書かれていたりする。まずはこれを確かめる。
+
+### 事前知識(表記編)
+ECMAScriptで書かれたソースコードのテキストはUnicodeのコードポイントとして扱われた後、
+
+- トークン(token)
+- 行終端(line termination)
+- コメント(comments)
+- 空白(white space)
+
+の4つで構成された列に変換される。これら4つは**input element**と呼ばれ、テキストを左から右に読み取りながら次のinput elementが続く限り、できるだけ長い列に変換される。
+
+この変換には[**lexical grammar**](https://www.ecma-international.org/ecma-262/#sec-syntactic-and-lexical-grammars)という文法が使われる。ECMAScriptの仕様書にはいくつかの文法が定められているがlexical grammarはその1つ。lexical grammarはContext-Free Grammarで表記されていて`左辺::右辺`の形式を取る。例えば`InputElementDiv`は以下のように表す。
+
+```
+InputElementDiv::
+  WhiteSpace
+  LineTerminator
+  Comment
+  CommonToken
+  DivPunctuator
+  RightBracePunctuator
+```
+
+これは左辺`InputElementDiv`が
+
+- `WhiteSpace`
+- `LineTerminator`
+- `Comment`
+- `CommonToken`
+- `DivPunctuator`
+- `RightBracePunctuator`
+
+の6種類から成ることを示している。
+
+また、この6つはそれ自体が新たな左辺になる。このようにlexical grammarは終端まで再帰的に続いていく。
+
+lexical grammarを使った解析の後は、tokenの列が構文的に正しいコンポーネントとなっているかを確かめるために[**syntactic grammar**](https://www.ecma-international.org/ecma-262/#sec-syntactic-grammar)が適用される。syntactic grammarもlexical grammar同様、ECMAScriptに定められている文法の1つ。表記は`左辺:右辺`となり、lexical grammarと比べて`:`の数が1個少なくなっている。
+
+例えばリテラル表記は以下のように示される。
+
+```
+Literal:
+  NullLiteral
+  BooleanLiteral
+  NumericLiteral
+  StringLiteral
+```
+
+### tokenとしてのnew
+さて、lexical grammarの中には識別子の名前を決めるため`IdentifierName`と呼ばれるtokenが存在する。
+
+[IdentifierName](https://tc39.es/ecma262/#prod-IdentifierName)
+
+```
+IdentifierName::
+  IdentifierStart
+  IdentifierNameIdentifierPart
+```
+
+さらに`IdentifierName`のうち、`if`、`while`、`async`、`await`のように文法的に意味があるものは**keyword**と呼ばれる。そして多くのkeywordは**reserved word**にも分類される
+
+上記のことは[Keywords and Reserved Words](https://www.ecma-international.org/ecma-262/#sec-keywords-and-reserved-words)で確認できる。
+>A keyword is a token that matches IdentifierName, but also has a syntactic use; that is, it appears literally, in a fixed width font, in some syntactic production. The keywords of ECMAScript include if, while, async, await, and many others.
+
+>A reserved word is an IdentifierName that cannot be used as an identifier. Many keywords are reserved words, but some are not, and some are reserved only in certain contexts. if and while are reserved words. await is reserved only inside async functions and modules. async is not reserved; it can be used as a variable name or statement label without restriction.
+
+
+以上のことを(厳密ではないが)図にすると以下のようになる。
+
+<ImageWithCaption {... category} />
+
+`new`は上の図のうち赤色の部分、つまりreserved wordに属する。lexical grammarの中でreserved wordは`ReservedWord`とされ以下のように表される。
+
+[ReservedWord](https://tc39.es/ecma262/#prod-ReservedWord)
+
+```
+ReservedWord::one of
+  await break case catch class const continue debugger default
+    delete do else enum export extends false finally for function
+    if import in instanceof new null return super switch this throw
+    true try typeof var void while with yield
+```
+
+さらに仕様書には以下のように書かれている。
+> A reserved word is an IdentifierName that cannot be used as an identifier.
+
+> 予約語は識別子として使うことのできないIdentifierNameのことである。(拙訳)
+
+ここでいうidentifier(識別子)はsyntactic grammarで登場する。
+
+### 変数にnewが指定できない理由
+
+変数名に`new`が使えない理由を見ていきたい。syntactic grammarの中では`var`を使った変数宣言に`VariableStatement`、`VariableDeclarationList`、`VariableDeclaration`が使われる。
+
+[VariableStatement](https://www.ecma-international.org/ecma-262/#sec-variable-statement)
+
+```
+VariableStatement[Yield, Await]:
+  varVariableDeclarationList[+In, ?Yield, ?Await] ;
+
+VariableDeclarationList[In, Yield, Await]:
+  VariableDeclaration[?In, ?Yield, ?Await]
+  VariableDeclarationList[?In, ?Yield, ?Await] , VariableDeclaration[?In, ?Yield, ?Await]
+
+VariableDeclaration[In, Yield, Await]:
+  BindingIdentifier[?Yield, ?Await] Initializer[?In, ?Yield, ?Await]opt
+  BindingPattern[?Yield, ?Await] Initializer[?In, ?Yield, ?Await]
+```
+
+一方、`let`と`const`を使った変数宣言には`LexicalDeclaration`、`LetOrConst`、`BindingList`、`LexicalBinding`が現れる。
+
+[Let and Const Declarations](https://www.ecma-international.org/ecma-262/#sec-let-and-const-declarations)
+
+```
+LexicalDeclaration[In, Yield, Await]:
+  LetOrConst BindingList[?In, ?Yield, ?Await];
+
+LetOrConst:
+  let
+  const
+
+BindingList[In, Yield, Await]:
+  LexicalBinding[?In, ?Yield, ?Await]
+  BindingList[?In, ?Yield, ?Await] , LexicalBinding[?In, ?Yield, ?Await]
+
+LexicalBinding[In, Yield, Await]:
+  BindingIdentifier[?Yield, ?Await] Initializer[?In, ?Yield, ?Await] opt
+  BindingPattern[?Yield, ?Await] Initializer[?In, ?Yield, ?Await]
+```
+
+`[]`内に登場する`In`や`?Yield`、末尾にある`opt`については今回触れない。
+
+上記を見比べてみると`var`を使った変数宣言、`let`または`const`を使った変数宣言には共通して内部で`BindingIdentifier`が使われている。
+
+さらにこの`BindingIdentifier`を見てみると内部で`Identifier`が登場する。
+
+[BindingIdentifier](https://www.ecma-international.org/ecma-262/#prod-BindingIdentifier)
+```
+BindingIdentifier[Yield, Await]:
+  Identifier
+  yield
+  await
+```
+
+[Identifier](https://www.ecma-international.org/ecma-262/#prod-Identifier)
+```
+Identifier:
+  IdentifierName but not ReservedWord
+```
+
+つまり、`Identifier`となれるのは`IdentifierName`のうち`ReservedWord`に属さないものである。以上のことから`new`は`Identifier`として使うことができないことが分かる。
+
+```javascript
+var new; // Syntax Error
+let new; // Syntax Error
+var new = 1; // Syntax Error
+let new = 1; // Syntax Error
+const new = 1; // Syntax Error
+```
+
+一方、オブジェクトをリテラルで表記したり、プロパティにアクセスする際のsyntactic grammarに`Identifier`は登場しない。
+そのため以下のコードはエラーにならない。
+
+```javascript
+var obj1 = { new: 1 }; // ok
+let obj2 = {};
+obj2.new = 1; // ok
+obj2.new // ok
+obj2["new"] // ok
+```
+
+### tokenとしてのnewが許される表記
+syntactic grammarで`new`の登場が許されるのものの一つに`MemberExpression`がある。
+
+[MemberExpression](https://www.ecma-international.org/ecma-262/#prod-MemberExpression)
+
+```
+MemberExpression[Yield, Await]:
+  PrimaryExpression[?Yield, ?Await]
+  MemberExpression[?Yield, ?Await] [ Expression[+In, ?Yield, ?Await] ]
+  MemberExpression[?Yield, ?Await] . IdentifierName
+  MemberExpression[?Yield, ?Await] TemplateLiteral[?Yield, ?Await, +Tagged]
+  SuperProperty[?Yield, ?Await]
+  MetaProperty
+  new MemberExpression[?Yield, ?Await] Arguments[?Yield, ?Await]
+```
+
+一番下に`new MemberExpression[?Yield, ?Await] Arguments[?Yield, ?Await]`という表記がある。これは冒頭に掲げたコードが該当する。
+
+```javascript
+let car = new Vehicle("A-1234", 4);
+// '=' より右側の表記が 'new MemberExpression[?Yield, ?Await] Arguments[?Yield, ?Await]' に当てはまる
+```
+
+そして、これまでのsyntactic grammarとコードの関係を図に表すと以下のようになる(が、本来コードへたどり着くにはもう少しsyntactic grammarをたどる必要がある。例えば`Vehicle`はそれ自身が`MemberExpression`であるが、途中[`IdentifierReference`](https://www.ecma-international.org/ecma-262/#prod-IdentifierReference)にたどり着く)。
+
+<ImageWithCaption { ... tree} />
+
+では`MemberExpression`のうち、`new MemberExpression[?Yield, ?Await] Arguments[?Yield, ?Await]`は実行時にどのような働きをしているのだろうか。
+
+

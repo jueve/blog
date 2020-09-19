@@ -1,0 +1,73 @@
+## 開発途中の雑感 
+まとまりがないので順不同に書く。
+
+### process間の通信について
+ElectronのAPIには
+
+- main processのみで動くAPI
+- renderer processのみで動くAPI
+- main processとrenderer processの両方で動くAPI
+
+
+の3種類がある。どのAPIがどれに対応しているかは[ドキュメント](https://www.electronjs.org/docs/api)を見れば分かるが使い方を理解するのに時間がかかった。例えばボタンをクリックすることで外部にHTTP/HTTPSリクエストを飛ばしてJSONを取得したいとする。このときリクエストを送るには[netモジュール](https://www.electronjs.org/docs/api/net)を使うが、netはmain process側のみで使用できるAPIなので、renderer process側のファイル(この例だとボタンが定義されている.jsxファイルや.tsxファイル)でnetをimportしても意味がない。
+
+この場合は
+
+1. 一度renderer process側からmain process側にメッセージを送る
+2. main process側がメッセージを受け取る
+3. main process側がnetモジュールを使ってリクエストを飛ばしてレスポンスを受け取った後、bodyをパースしてJSONオブジェクトに変換する
+4. 今度はmain process側からrenderer process側に送り返してやる
+
+という一連の流れが必要になる。
+
+このさながらリクエスト/レスポンスのような体系がprocess間のやりとりの基本で、データベースのレコードの追加やログファイルへの書き込みといった処理を実装したいときはだいたいこれが関わってくる。
+
+実装方法についてはrenderer process側で`ipcRenderer`、main process側で`ipcMain`を使う。コールバック関数を伴うので、DOMのevent linstenerのような感覚で実装できる。一度感覚を掴んでしまえば楽になるはず。async/awaitに特化したAPIもある。
+
+
+```javascript
+// renderer-process
+// 1.ボタンをクリックしてメッセージを送信
+
+import React, { useEffect } from "react";
+import { ipcRenderer } from "electron";
+
+function Component(): JSX.Element {
+  const handleClick = () => {
+    ipcRenderer.send("get-json");  // 1
+  }
+
+  useEffect(() => {
+    ipcRenderer.on("succeeded", (event, res) => {
+      console.log(res);
+    });
+  }, []);
+
+  return(
+    <button onClick={handleClick}>
+      click
+    </button>
+  );
+}
+```
+
+```javascript
+// main-process
+// 2. renderer-processからメッセージを受け取る
+// 3. リクエストを投げてレスポンスを受け取る
+// 4. renderer-processにメッセージを送り返す
+
+import { ipcMain } from "electron";
+
+ipcMain.on("get-json", (event) => { // 2
+  const res = fetchSomethingAndParse(); // 3
+  event.reply("succeeded", res); // 4
+});
+```
+
+これは既にdeprecatedになっているのであまり関係ないが以前は2つのプロセスを媒介するのにremoteモジュールを使っていた。しかしElectronのメンバーによると[remoteオブジェクトはローカルのオブジェクトにアクセスするよりも10,000倍低速らしく](https://medium.com/@nornagon/electrons-remote-module-considered-harmful-70d69500f31)他にも問題点があるとのことで`ipcMain`と`ipcRenderer`の利用を呼びかけていた。
+
+### HTTP/HTTPSリクエストを叩く
+上記の例で軽く触れたがHTTP/HTTPSリクエストを叩きたいときはChromiumのネットワークライブラリを内部で使用しているnetを使ったほうが手間暇の意味で早いが、Promiseが返ってくるわけではないのでコールバック関数を書く必要があり面倒である。
+
+HTTP/HTTPSリクエストを送りたいとなると[axios](https://github.com/axios/axios)が思い浮かんだので使ってみたがサーバー側でCORSが有効になっているためアクセスできなかった。これを回避するためにmain processでウィンドウを生成する際にwebPreferncesオブジェクトのwebSecurityプロパティをfalseにするという荒業があるが[セキュリティリスクの観点から推奨されていないので使うことはできない。](https://www.electronjs.org/docs/tutorial/security#5-do-not-disable-websecurity)結局やり方が分からずnetを使用するに至った。

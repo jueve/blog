@@ -1,0 +1,29 @@
+import { ImageWithCaption } from "../../components/ImageWithCaption";
+const imgDir = "/assets/blog/writing-nes-emulator";
+const dkWithBug = {
+  src: `${imgDir}/dk-with-bug.png`,
+  alt: "バグがあるけどドンキーコングが表示される",
+  caption: "バグがあるけどドンキーコングが表示される",
+};
+const dkWithNoBug = {
+  src: `${imgDir}/dk.png`,
+  alt: "ドンキーコングが正しく表示される",
+  caption: "ドンキーコングが正しく表示される",
+};
+const rom = {
+  src: `${imgDir}/rom.jpg`,
+  alt: "カートリッジと吸い出し機",
+  caption: "カートリッジと吸い出し機",
+};
+
+
+## 起動
+
+ここまでくると画面描画の原因のほとんどはPPUだけになる。スプライト処理を実装するとゲーム上でスクロールがない「ドンキーコング」が起動する。
+<ImageWithCaption {... dkWithBug} />
+
+ROMの吸い出し機とカートリッジはAmazonで購入。吸い出しのアプリ起動にはWindowsが必要だった。
+<ImageWithCaption {... rom} />
+
+そして画像のようにゲームが正常に描画された。
+<ImageWithCaption {... dkWithNoBug} />

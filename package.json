@@ -1,0 +1,40 @@
+{
+  "name": "blog-starter",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "classnames": "2.2.6",
+    "date-fns": "2.10.0",
+    "next": "latest",
+    "prism-react-renderer": "^1.1.1",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  },
+  "devDependencies": {
+    "@mdx-js/loader": "^1.6.16",
+    "@mdx-js/react": "^1.6.18",
+    "@next/mdx": "^9.5.3",
+    "@types/node": "^14.6.4",
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^4.1.0",
+    "@typescript-eslint/parser": "^4.1.0",
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-mdx": "^1.8.2",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "gray-matter": "^4.0.2",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.1.1",
+    "react-markdown": "^4.3.1",
+    "react-syntax-highlighter": "^13.5.3",
+    "tailwindcss": "^1.4.0",
+    "typescript": "^4.0.2"
+  },
+  "license": "MIT"
+}

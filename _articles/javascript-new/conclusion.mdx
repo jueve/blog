@@ -1,0 +1,5 @@
+## まとめ
+
+`new`についてまずは表記的な観点から見た。変数名として使えないのは`new`が`ReservedWord`してlexical grammarで定義されており、syntactic grammarで使うことが許されていないためであった。
+
+次にランタイム時のオブジェクト生成に焦点を当て、仕様書内で定義されたinternal methodの`[[Construct]]`に着目した。`[[Construct]]`はconstructorと呼ばれるオブジェクトに定義されている新しいオブジェクトを生成するinternal methodだった。そのconstructorの正体はあらかじめ`function`宣言で定義された関数だった。

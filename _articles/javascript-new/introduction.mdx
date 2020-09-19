@@ -1,0 +1,46 @@
+JavaScriptの`new`演算子をECMAScript2020の仕様書から読み解く話。
+
+確認することは以下の2点である。
+
+* `new`が変数名として使えない理由
+* `new`を使ったオブジェクトの生成はどのように働いているか
+
+```javascript
+var new; // Syntax Error
+let new; // Syntax Error
+var new = 1; // Syntax Error
+let new = 1; // Syntax Error
+const new = 1; // Syntax Error
+
+var obj1 = { new: 1 }; // ok
+let obj2 = {};
+obj2.new = 1; // ok
+obj2.new // ok
+obj2["new"] // ok
+```
+
+```javascript
+function Vehicle(plate, capacity) {
+  this.plate = plate;
+  this.capacity = capacity;
+}
+
+let car = new Vehicle("A-1234", 4);
+```
+
+`class`を使っていない古い書き方だが、実際のコードと仕様書を照らし合わせていく関係上こちらの表記のほうが分かりやすいので`class`を使わずに進める。
+
+また、ES6で`new.target`も出てきたが今回これは対象外とする。
+
+```javascript
+// new.target
+function User (name) {
+  this.name = name;
+  if (!new.target) {
+    throw new Error(`Object 'User' must have a 'new' prefix.`);
+  }
+}
+
+let Alice = new User("Alice"); // ok
+let Bob = User("Bob"); // Uncaught Error
+```

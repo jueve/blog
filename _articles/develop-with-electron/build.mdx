@@ -1,0 +1,6 @@
+## ビルド
+便宜上、開発の途中経過となる雑感を飛ばして先にこちらに言及する。
+
+electron-webpackはビルドに[electron-builder](https://www.electron.build/)を採用している。使い方が意外とシンプルでOSごとに適用したいビルドの設定をpackage.jsonに記していけばいい。さらに`electron-builder install-app-deps`と叩けばsqlite3などNative Node Modulesの依存解決をしてくれる。これらのおかげでビルドの手間がかなり省けた。(electron-builderというよりも[electron-rebuild](https://www.electronjs.org/docs/tutorial/using-native-node-modules#installing-modules-and-rebuilding-for-electron)のおかげかもしれない)
+
+余談だがアイコンの生成には[electron-icon-maker](https://www.npmjs.com/package/electron-icon-maker)が便利。windowsはビルドの際アイコンを用意してないと途中でエラー吐くので注意。macの場合はそもそもmac上でないと.dmgファイルを作ることができないみたいなやり取りをどこかのissueで見た。真偽不明。

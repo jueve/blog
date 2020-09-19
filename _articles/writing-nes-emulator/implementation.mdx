@@ -1,0 +1,62 @@
+## 実装
+3月の半ばからNESエミュレータの実装に入った。まずはNES研究室の`sample1.nes`でHello Worldを表示することを最初の目標に掲げた。
+
+また、NESはハードの制約上画面描画などに限界があったりするのでゲームによってはカートリッジ側で基盤を拡張している。ドラクエのセーブ機能やゼルダの伝説で実現される上下方向のスクロールはその例で、このカートリッジの機能や構成はMapperと呼ばれている。
+
+多くのゲームに対応するには多くのMapperを実装する必要があるがそんな気力はなく、任天堂の初期のゲームのみが動くMapper 0だけに対応している。今回の`sample1.nes`もこのMapperになる。
+
+手順は以下の通り
+1. 6502アセンブリの勉強
+2. CPUの実装
+3. メモリの実装
+4. iNESヘッダ読み込みの実装
+5. PPUのBackground処理を実装
+6. GUIを実装
+7. コントローラーを実装
+8. `sample1.nes`のプログラムでHello Worldを表示する
+9. CPUテストプログラムの`nestest.nes`を動かす
+10. PPUのSprite処理を実装
+11. スクロールしないゲームを動かす
+12. スクロールするゲームを動かす
+
+資料は以下の通り
+
+### Nesdev Wiki
+http://wiki.nesdev.com/w/index.php/Nesdev_Wiki
+
+NESの仕様を把握するために一番参考にしたページ。知りたいことはほとんどここで理解できた。
+
+### NES研究室
+http://hp.vector.co.jp/authors/VA042397/nes/index.html
+
+NESの仕様にざっくりと触れている。sample1.nesはこのサイトから取得。いきなりNesdev Wikiを読むよりもまずはここで概観を把握するといいと思う。
+
+### 6502マシン語ゲームプログラミング
+https://github.com/suzukiplan/mgp-fc
+
+6502のプログラミングとNESの仕様両方に触れたページ。NES研究室にはないPPUのOAMや画面のオーバースキャンなどの説明がある。ラスタースクロールについてはこちらの方がわかりやすかった。このリポジトリの作者はNESゲームを2本をアセンブリで書き上げていて、自分はエミュレータを書く際にそのソースコードをほんの少しだけ読んだりもしていた。
+
+### Writing your own NES emulator - overview
+https://yizhang82.dev/nes-emu-overview
+上記の実装の順番はここを参考にしている。ここの著者はC++で音以外を一週間半で書き上げている。
+
+### Easy 6502
+https://skilldrick.github.io/easy6502/
+
+CPUの実装で必要。アセンブリを記述しながらメモリやレジスタの値が確認できるのでアドレッシングモードの種類や分岐命令の挙動などがここで分かる。
+
+### Instruction Reference
+http://www.obelisk.me.uk/6502/reference.html
+
+6502の命令セット。各命令に作用するフラグの種類やサイクル数などの記述がある。
+
+### 6502 Undocumented Opcodes
+http://nesdev.com/undocumented_opcodes.txt
+
+6502の非公式命令セット。後述する`nestest.nes`は非公式命令の一部を実装しないとテストが通らないため必要。
+
+### ファミコンエミュレータの創り方 - Hello, World!編 - - Qiita
+https://qiita.com/bokuweb/items/1575337bef44ae82f4d3
+
+Background処理で参考になる。ここも概観を掴むのには良いなと思った。
+

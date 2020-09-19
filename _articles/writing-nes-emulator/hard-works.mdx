@@ -1,0 +1,35 @@
+import { ImageWithCaption } from "../../components/ImageWithCaption";
+const imgDir = "/assets/blog/writing-nes-emulator";
+const sample1Nes = {
+  src: `${imgDir}/sample1-nes.png`,
+  alt: "sample1.nesでHELLO, WORLDが表示される",
+  caption: "sample1.nesでHELLO, WORLDが表示される",
+};
+const nesTest = {
+  src: `${imgDir}/nestest.png`,
+  alt: "CPUのテストが成功する",
+  caption: "CPUのテストが成功する"
+};
+
+## 苦戦
+
+データの流れ方が分からないと実装のしようがないため、とにかくNesdev Wikiを読み漁った。実装する時間よりもドキュメントを読んでる時間の方がはるかに長かったように思う。
+
+GitHubに上がっているエミュレータも何度も読んだ。JavaとGoで書かれたもので、どちらの言語も書いたことがなかったがNES側の仕様が分かっていると何がしたいのかがなんとなく分かることが興味深かった。
+
+* [halfnes](https://github.com/andrew-hoffman/halfnes) Java製
+* [nes](https://github.com/fogleman/nes) Go製
+
+そして実装から2ヶ月後、`sample1.nes`でHello Worldが表示される。
+
+<ImageWithCaption {...sample1Nes} />
+
+実は`sample1.nes`はCPUとPPUを適当に実装しても動いてしまう。そして両方ともおざなりにしてしまうと描画でバグが発生した際にどちらに原因があるのかを特定するのが本当につらい。
+
+このため、まずはCPUを完成させることにした。Nesdev WikiのこのページからCPUのテストROMである`nestest.nes`を取得して動かす。
+
+テストROMが期待通りに動くかを確認する方法は2つあって画面描画とコントロラーを実装して確認する方法と、実行結果をファイルに書き込んだ後にdiffを叩いてログと差分を取るやりかたがある。
+
+<ImageWithCaption {...nesTest} />
+
+余談だが、CPUには割り込みのうち、NMIを実装しないとテストを選択するアイコン(上の画像左側にあるアスタリスクのマーク)が表示されない。そこに気づかなかったため1週間くらい進捗がなかった。

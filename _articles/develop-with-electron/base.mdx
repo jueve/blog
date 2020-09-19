@@ -1,0 +1,6 @@
+## Electron基本概念
+* JavaScriptとHTML、そしてCSSでクロスプラットフォームのデスクトップアプリケーションが作れるフレームワーク
+* Electronでできたアプリは2種類のプロセスから成る。アプリのエントリーポイントとなり、OSに近い存在である1つのmain processと、ブラウザのレンダリング部分を担う1つ以上のrenderer process
+* プロセスの名称は違えどElectronのベースとなるChromiumがこのアーキテクチャを採用しているのでElectron自身もこのアーキテクチャを使っているらしい
+* この2種類のプロセスを連携させるには、プロセス間で通信を取る(メッセージのやり取り)をする必要がある
+* [Native Node Modules](https://nodejs.org/api/addons.html)が使える(`fs`とか)

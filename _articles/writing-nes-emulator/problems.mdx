@@ -1,0 +1,18 @@
+import { ImageWithCaption } from "../../components/ImageWithCaption";
+const imgDir = "/assets/blog/writing-nes-emulator";
+const marioWithBug = {
+  src: `${imgDir}/super-mario-bros-with-bug.gif`,
+  alt: "勝手に横移動するスーパーマリオブラザーズ",
+  caption: "勝手に横移動するスーパーマリオブラザーズ",
+};
+
+## 課題
+ここまではまだどうにかなったがここから作業が止まる。課題は2つ。
+
+1つ目がFPS。60必要なのだが、ドンキーコングが初めて動いた時点5しか出てなかった。不要な処理を省いたりして55くらいまで持ってくることはできたがまだ足りないので頑張る必要がある。そして全然安定しないので処理を軽くする必要がある。
+
+2つ目がスクロール。下は横スクロール処理が必要な「スーパーマリオブラザーズ」。ゲーム起動直後になぜか勝手にスクロールする。
+
+<ImageWithCaption {... marioWithBug} />
+
+この2つをクリアすればどうにか最低限の要素は完成するけど、バグを探すのが大変すぎて正直つらい。
