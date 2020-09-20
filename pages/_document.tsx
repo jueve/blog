@@ -7,6 +7,10 @@ export default class MyDocument extends Document {
       <Html lang="ja">
         <Head>
           <link rel="shorcut icon" href="/favicon/favicon.ico" />
+          <meta
+            name="description"
+            content="blog posts by cashitsuki(かしつき) who is interested in front-end development"
+          />
         </Head>
         <body>
           <Main />
