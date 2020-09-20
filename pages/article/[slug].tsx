@@ -19,7 +19,7 @@ export default function EntireArticle(props: Record<string, string>): JSX.Elemen
   return (
     <div>
       <HomeHeader />
-      <div id="markdown" className="shadow-xl px-6 py-8">
+      <div id="markdown">
         <DMXComponent />
       </div>
     </div>
