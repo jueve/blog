@@ -6,7 +6,7 @@ export function HomeHeader(): JSX.Element {
     <div className="mb-10 mt-10">
       <div className="flex">
         <div className="flex-initial">
-          <img className="w-10 h-10 rounded-full mr-2" src="/assets/profile/icon.png" alt="avatar of cashitsuki" />
+          <img className="rounded-full mr-2" src="/assets/profile/icon.png" alt="avatar of cashitsuki" />
         </div>
         <div className="flex-initial">
           <h1 className="text-2xl">cashitsuki</h1>
