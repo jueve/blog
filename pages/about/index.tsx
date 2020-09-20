@@ -1,10 +1,14 @@
 import React from "react";
 import { HomeHeader } from "../../components/HomeHeader";
+import Head from "next/head";
 
 
 export default function Index(): JSX.Element {
   return (
     <div>
+      <Head>
+        <title key="title-about">About | cashitsuki</title>
+      </Head>
       <HomeHeader />
       <div className="mb-10">
         <div className="flex">
