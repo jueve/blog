@@ -1,6 +1,5 @@
 import "../styles/index.css";
 import "../styles/markdown.css";
-import "tailwindcss/dist/tailwind.min.css";
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { codeBlock } from "../components/CodeBlock";
