@@ -8,6 +8,7 @@ export default function Index(): JSX.Element {
     <div>
       <Head>
         <title key="title-about">About | cashitsuki</title>
+        <link rel="canonical" href="/about" key="canonical-about" />
       </Head>
       <HomeHeader />
       <div className="mb-10">

@@ -7,6 +7,7 @@ import { Context } from "../../interface/Context";
 import { ArticleSummary } from "../../interface/ArticleSummary";
 import { Paths } from "../../interface/Paths";
 import { HomeHeader } from "../../components/HomeHeader";
+import Head from "next/head";
 
 export default function EntireArticle(props: Record<string, string>): JSX.Element {
   const router = useRouter();
@@ -17,12 +18,17 @@ export default function EntireArticle(props: Record<string, string>): JSX.Elemen
   const DMXComponent = dynamic(() => import(`../../_articles/${slug}/index.mdx`));
 
   return (
-    <div>
-      <HomeHeader />
-      <div id="markdown">
-        <DMXComponent />
+    <>
+      <Head>
+        <link rel="canonical" href={`/article/${slug}`} key={`canonical-${slug}`} />
+      </Head>
+      <div>
+        <HomeHeader />
+        <div id="markdown">
+          <DMXComponent />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
