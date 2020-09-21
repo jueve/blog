@@ -1,5 +1,6 @@
 import { ImageWithCaption } from "../../components/ImageWithCaption"
-const imageDir = "/assets/blog/javascript-new";
+import headerInfo from "./header.json";
+const imageDir = `/assets/blog/${headerInfo.slug}`;
 const objects = {
   src: `${imageDir}/relation-between-objects.png`,
   alt: "function objectとconstructorの関係",

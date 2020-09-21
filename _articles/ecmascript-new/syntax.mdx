@@ -1,5 +1,6 @@
 import { ImageWithCaption } from "../../components/ImageWithCaption"
-const imageDir = "/assets/blog/javascript-new";
+import headerInfo from "./header.json";
+const imageDir = `/assets/blog/${headerInfo.slug}`;
 const category = {
   src: `${imageDir}/category.png`,
   alt: "IdentifierName、keywords、reserved wordsの関係",
