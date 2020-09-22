@@ -12,12 +12,12 @@ export function Share(articleSummary: ArticleSummary): JSX.Element {
       <div className="flex">
         <div className="flex-initial mr-2">
           <TwitterShareButton url={page} title={titleWithName}>
-            <TwitterIcon size={32} round />
+            <TwitterIcon size={42} round />
           </TwitterShareButton>
         </div>
         <div className="flex-initial mr-2">
           <FacebookShareButton url={page} title={titleWithName}>
-            <FacebookIcon size={32} round />
+            <FacebookIcon size={42} round />
           </FacebookShareButton>
         </div>
       </div>
