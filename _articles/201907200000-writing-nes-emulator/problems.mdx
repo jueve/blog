@@ -1,5 +1,6 @@
 import { ImageWithCaption } from "../../components/ImageWithCaption";
-const imgDir = "/assets/blog/writing-nes-emulator";
+import headerInfo from "./header.json";
+const imgDir = `/assets/blog/${headerInfo.slug}`;
 const marioWithBug = {
   src: `${imgDir}/super-mario-bros-with-bug.gif`,
   alt: "勝手に横移動するスーパーマリオブラザーズ",
