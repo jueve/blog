@@ -24,9 +24,11 @@ export default function EntireArticle(props: Record<string, string>): JSX.Elemen
       </Head>
       <div>
         <HomeHeader />
-        <div id="markdown">
-          <DMXComponent />
-        </div>
+        <article>
+          <div id="markdown">
+            <DMXComponent />
+          </div>
+        </article>
       </div>
     </>
   );
