@@ -65,7 +65,7 @@ internal slotとinternal methodを取り上げた理由は、ECMAScriptのオブ
 
 > Creates an object. Invoked via the new operator or a super call. The first argument to the internal method is a list containing the arguments of the constructor invocation or the super call. The second argument is the object to which the new operator was initially applied. Objects that implement this internal method are called constructors. A function object is not necessarily a constructor and such non-constructor function objects do not have a [[Construct]] internal method.
 
-> オブジェクトを生成し、`new`演算子か`super`の宣言を経由して呼び出される。第一引数にconstructorの呼び出しの引数を含むリスト、または`super`を使った宣言の引数を含むリストを与える。第二引数には`new`演算子が最初に適用されたオブジェクトを与える。このinternal methodを実装したオブジェクトはconstructorと呼ばれる。function objectはconstructorである必要はなく、constructorではないfunction objectは[[Constructor]]というinternal methodを持たない。(拙訳)
+> オブジェクトを生成し、`new`演算子か`super`の宣言を経由して呼び出される。第一引数にconstructorの呼び出しの引数を含むリスト、または`super`を使った宣言の引数を含むリストを与える。第二引数には`new`演算子が最初に適用されたオブジェクトを与える。このinternal methodを実装したオブジェクトはconstructorと呼ばれる。function objectはconstructorである必要はなく、constructorではないfunction objectは[[Construct]]というinternal methodを持たない。(拙訳)
 
 以上から分かることは
 
@@ -210,9 +210,10 @@ F.[[Construct]](argumentsList, newTarget)
 
 <ImageWithCaption {... tree} />
 
-つまり`ref`は`Vehicle`の評価の結果、`function`で宣言した`Vehicle`の参照の結果を意味する。言い換えると、`EvaluateNew`内で生成される変数`constructor`の源は`function Vehicle`の参照の結果である。
+以上から`ref`は`Vehicle`の評価の結果、つまり`function`で宣言した`Vehicle`の参照の結果を意味する。言い換えると、`EvaluateNew`内で生成される変数`constructor`の源は`Vehicle`にある。
 
 ```javascript
+// 宣言時にconstructorになっている…?
 function Vehicle(plate, capacity) {
   this.plate = plate;
   this.capacity = capacity;
