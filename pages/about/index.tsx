@@ -76,7 +76,7 @@ export default function Index(): JSX.Element {
               </a>
             </h3>
             <p>ファミコンエミュレータ(未完成)</p>
-            <a className="underline text-blue-600" href="./article/writing-nes-emulator">
+            <a className="underline text-blue-600" href="./article/20190720-writing-nes-emulator">
               関連記事
             </a>
           </li>
