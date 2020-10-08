@@ -319,25 +319,25 @@ import { toVNode } from 'snabbdom/tovnode';
 
 const div = document.createElement('div');
 
-const vnode1 = toVnode(div);
-const vnode2 = h('div', [
+const div = toVnode(div);
+const vnode1 = h('div', [
   h('p', h('a', 'Alice')),
   h('ul', [
     h('li', 'HTML'), h('li', 'CSS')
   ]),
 ]);
 
-const vnode3 = h('div', [
+const vnode2 = h('div', [
   h('p', h('a', 'Bob')),
   h('ul', [
     h('li', 'HTML'), h('li', 'CSS'), h('li', 'JavaScript')
   ]),
 ]);
 
-const temp = patch(vnode1, vnode2);
-const result = patch(temp, vnode3);
-const elm1 = temp.elm;
-const elm2 = result.elm;
+const divToVNode1 = patch(div, vnode1);
+const vNode1ToVNode2 = patch(temp, vnode2);
+const divToVNode1 = temp.elm;
+const vNode1ToVNode2 = result.elm;
 
 console.log(elm1.tagName); // 'DIV'
 
