@@ -317,7 +317,7 @@ import { init } from 'snabbdom/init';
 import { h } from 'snabbdom/h';
 import { toVNode } from 'snabbdom/tovnode';
 
-const div = toVnode()document.createElement('div'));
+const div = toVnode(document.createElement('div'));
 
 const vnode1 = h('div', [
   h('p', h('a', 'Alice')),
