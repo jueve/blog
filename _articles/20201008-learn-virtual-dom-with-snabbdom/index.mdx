@@ -335,9 +335,9 @@ const vnode2 = h('div', [
 ]);
 
 const divToVNode1 = patch(div, vnode1);
-const vNode1ToVNode2 = patch(temp, vnode2);
+const VNode1ToVNode2 = patch(temp, vnode2);
 const elm1 = divToVNode1.elm;
-const elm2 = vNode1ToVNode2.elm;
+const elm2 = VNode1ToVNode2.elm;
 
 console.log(elm1.tagName); // 'DIV'
 
