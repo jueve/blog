@@ -218,8 +218,8 @@ const vnode = toVNode(div);
 [snabbdom/src/package/init.ts](https://github.com/snabbdom/snabbdom/blob/v2.1.0/src/package/init.ts#L48)
 
 ```typescript
-// `init`関数の第一引数にはhookに利用したいモジュールを配列で渡す。
-// 空の配列を渡した場合、hookが動かずに仮想DOMの差分検知アルゴリズムだけが動作する。
+// `init`関数の第一引数にはhooksに利用したいモジュールを配列で渡す。
+// 空の配列を渡した場合、hooksが動かずに仮想DOMの差分検知アルゴリズムだけが動作する。
 // 第二引数はオプションで、カスタムしたDOMのAPIを渡すことができる。
 export function init (modules: Array<Partial<Module>>, domApi?: DOMAPI)
 ```
@@ -284,6 +284,8 @@ console.log(result.elm.textContent); // 'World'
 
 1. `before`と`after`のノード同士で`sel`プロパティや`children`プロパティなどを**JavaScriptのオブジェクトやプリミティブ値の単位で**比較する。つまり、この時点でDOM APIは呼び出していない。
 2. `before`と`after`に何かしらの違いがある場合、共有した`elm`プロパティにDOM APIを適用して実DOMを更新する。
+
+また、`before`には無いが`after`にはある要素、逆に`before`にはあったが`after`で無くなっている要素がある場合は、その要素の追加/削除があることを示している。
 
 以下、プロフィールをイメージしたHTMLを使って流れを説明したい。
 
@@ -410,8 +412,8 @@ li要素3つ目。`vnode1`の`children`プロパティには無い要素が`vnod
 Snabbdomにはhooksもある。
 
 ### hooksの実行
-hooksにはモジュール経由で使用できるものとDOM APIで実DOMを操作する際に使われるものがある。
-各hookには実行タイミングみたいなものがあり、これはhookの実行をどの段階で行うかという基準で分類されている。
+hooksにはモジュール経由で使用できるものとDOM APIで実DOMを操作する際に使用するものがある。
+また、hooksには実行タイミングみたいなものが定められている。
 
 [公式ドキュメント内](https://github.com/snabbdom/snabbdom/tree/v2.1.0#overview)では10種類あるとのこと。
 
