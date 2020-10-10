@@ -1,51 +1,6 @@
-#markdown h2 {
-  margin: 2.75rem 0 1rem 0;
-  font-size: 2rem;
-  border-bottom: 0.25rem solid #718096;
-}
-
-#markdown h3 {
-  margin: 2.5rem 0 0 0;
-  font-size: 1.5rem;
-}
-
-#markdown h4 {
-  margin: 2rem 0 0.2rem 0;
-  font-size: 1.25rem;
-}
-
-#markdown p {
-  line-height: 1.70rem;
-  margin-top: 1.25rem;
-}
-
-#markdown a {
-  color: #3182ce;
-  text-decoration: underline;
-}
-
-#markdown ul,
-#markdown ol {
-  margin: 2rem 2.5rem 2rem 2.5rem;
-}
-
-#markdown ul li {
-  list-style: disc;
-  margin-bottom: 0.5rem;
-}
-
-#markdown ol li {
-  list-style: decimal;
-  margin-bottom: 0.25rem;
-}
-
 #markdown .code-preview {
   overflow: auto;
-  font-size: 1rem;
-  background-color: rgb(1, 22, 39);
-  border-radius: 0.375rem;
-  margin: 1.25rem 0;
-  padding: 1.25rem 0 0 2rem;
+  background-color: rgb(30, 30, 30);
 }
 
 #markdown .token:last-child {
@@ -64,4 +19,3 @@
   padding-left: 1rem;
   color: #718096;
 }
-

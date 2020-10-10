@@ -2,7 +2,7 @@ import "../styles/index.css";
 import "../styles/markdown.css";
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
-import { codeBlock } from "../components/CodeBlock";
+import { MDXComponents } from "../components/MDXComponents";
 import Head from "next/head";
 
 // eslint-disable-next-line react/prop-types
@@ -14,7 +14,7 @@ export default function MyApp({ Component, pageProps }) {
       </Head>
       <div id="wrapper" className="container mx-auto">
         <div id="inner">
-          <MDXProvider components={codeBlock}>
+          <MDXProvider components={MDXComponents}>
             <Component {...pageProps} />
           </MDXProvider>
         </div>
