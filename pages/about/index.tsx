@@ -18,12 +18,12 @@ export default function Index(): JSX.Element {
         </div>
         <ul>
           <li>
-            <a className="underline text-blue-600" href="https://github.com/jueve">
+            <a className="text-blue-700" href="https://github.com/jueve">
               GitHub
             </a>
           </li>
           <li>
-            <a className="underline text-blue-600" href="https://twitter.com/cashitsuki">
+            <a className="text-blue-700" href="https://twitter.com/cashitsuki">
               Twitter
             </a>
           </li>
@@ -60,7 +60,7 @@ export default function Index(): JSX.Element {
           <li className="mb-4">
             <div>
               <h3 className="text-lg">
-                <a className="underline text-blue-600" href="https://github.com/jueve/atcoder-review">
+                <a className="text-blue-700" href="https://github.com/jueve/atcoder-review">
                   AtCoder Review
                 </a>
               </h3>
@@ -71,12 +71,12 @@ export default function Index(): JSX.Element {
           </li>
           <li className="mb-4">
             <h3 className="text-lg">
-              <a className="underline text-blue-600" href="https://github.com/jueve/iris">
+              <a className="text-blue-700" href="https://github.com/jueve/iris">
                 IRIS
               </a>
             </h3>
             <p>ファミコンエミュレータ(未完成)</p>
-            <a className="underline text-blue-600" href="./article/20190720-writing-nes-emulator">
+            <a className="text-blue-700" href="./article/20190720-writing-nes-emulator">
               関連記事
             </a>
           </li>
@@ -90,13 +90,13 @@ export default function Index(): JSX.Element {
         </div>
         <ul>
           <li>
-            <a className="underline text-blue-600" href="https://atcoder.jp/users/cashitsuki">
+            <a className="text-blue-700" href="https://atcoder.jp/users/cashitsuki">
               AtCoder茶色
             </a>
           </li>
           <li>
             <p>
-              <a className="underline text-blue-600" href="https://past.atcoder.jp/">
+              <a className="text-blue-700" href="https://past.atcoder.jp/">
                 アルゴリズム実技検定
               </a>
               初級
