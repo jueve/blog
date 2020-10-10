@@ -5,10 +5,10 @@ import theme from "prism-react-renderer/themes/vsDark";
 
 export function Preformatted(props: MDXProviderProps): JSX.Element {
   const className = props.children.props.className || "";
-  const newClassName = className + " pt-8 px-6 mb-4";
+  const newClassName = className + " pt-8 px-6";
   const matches = className.match(/language-(?<lang>.*)/);
   return (
-    <div className="overflow-auto code-preview rounded-md">
+    <div className="overflow-auto code-preview rounded-md mb-4">
       <div>
         <Highlight
           {...defaultProps}
