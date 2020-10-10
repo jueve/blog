@@ -15,12 +15,12 @@ export function HomeHeader(): JSX.Element {
       <div className="mt-2 flex">
         <div className="mr-3">
           <Link href="/">
-            <a className="text-xl text-blue-600 underline">Home</a>
+            <a className="text-xl text-blue-700">Home</a>
           </Link>
         </div>
         <div className="mr-2">
           <Link href="/about">
-            <a className="text-xl text-blue-600 underline">About</a>
+            <a className="text-xl text-blue-700">About</a>
           </Link>
         </div>
       </div>
