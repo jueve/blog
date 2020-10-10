@@ -32,7 +32,7 @@ declare module "@mdx-js/react" {
   };
 
   export interface MDXProviderProps {
-    children: React.ReactNode;
+    children: any;
     components: Components;
     href?: string;
     className?: string;
