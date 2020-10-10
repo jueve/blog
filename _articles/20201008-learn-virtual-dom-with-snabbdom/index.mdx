@@ -56,9 +56,9 @@ Snabbdomを選んだ理由は以下の2点。
 ## 概要
 Snabbdomの仮想DOMではHTMLの木構造をJavaScriptのオブジェクトで表現する。そして2つのオブジェクトにあるプロパティを比較しながら必要最低限のDOMのAPIを呼び出し、real DOM nodeの生成を行う。
 
-**仮想DOM自身が速いと表現するよりは、仮想DOMが最小限の回数でreal DOM nodeの更新をしてくれるため、コードを書く人間が闇雲にDOM APIを使ってreal DOM nodeを更新してしまうよりも相対的に速くなるという認識が正しいように思う。**
+**仮想DOM自身が速いというよりも、仮想DOMが最小限の回数でreal DOM nodeの更新をしてくれるため、コードを書く人間が闇雲にDOM APIを使ってreal DOM nodeを更新してしまうよりも相対的に速くなるという認識が正しいように思う。**
 
-日本の仮想DOMに関する記事では、仮想DOMと区別するためにreal DOM Nodeが「**実DOM**」と呼ばれたりする。本記事でもreal DOM nodeを示す際はこの言葉を使う。
+日本の仮想DOMに関する記事では、仮想DOMと区別するためにreal DOM nodeが「**実DOM**」と呼ばれたりする。本記事でもreal DOM nodeを示す際はこの言葉を使う。
 
 ## オブジェクトで表現するDOM Node
 SnabbdomはTypeScriptで書かれていて、仮想DOMを表現する際`VNode`というinterfaceが使われている。
@@ -76,7 +76,7 @@ export interface VNode {
 }
 ```
 
-`VNode`のプロパティのうち、仮想DOMの差分検知アルゴリズムの理解に最低限必要なのは`sel`、`children`、`elm`、`text`、`key`になる。
+`VNode`のプロパティのうち、仮想DOMの差分検知アルゴリズムの理解に最低限必要なのは以下の5つ。
 
 - `sel` ... 要素名が文字列として格納される。`<div>`タグなら`div`となる。
 - `children` ... VNodeの子要素を`Array`で管理する。
@@ -176,7 +176,7 @@ export function h (sel: any, b?: any, c?: any): VNode
 ```
 
 ### toVNode関数
-`VNode`の生成には`toVNode`関数もある。これはDOMを直接`VNode`に変換する関数になる。
+`VNode`の生成には`toVNode`関数もある。これは実DOMを直接`VNode`に変換する関数になる。
 
 [snabbdom/src/package/tovnode.ts](https://github.com/snabbdom/snabbdom/blob/v2.1.0/src/package/tovnode.ts)
 
@@ -285,7 +285,7 @@ console.log(result.elm.textContent); // 'World'
 1. `before`と`after`のノード同士で`sel`プロパティや`children`プロパティなどを**JavaScriptのオブジェクトやプリミティブ値の単位で**比較する。つまり、この時点でDOM APIは呼び出していない。
 2. `before`と`after`に何かしらの違いがある場合、共有した`elm`プロパティにDOM APIを適用して実DOMを更新する。
 
-また、`before`には無いが`after`にはある要素、逆に`before`にはあったが`after`で無くなっている要素がある場合は、その要素の追加/削除があることを示している。
+また、`before`には無いが`after`にはある要素、逆に`before`にはあったが`after`で無くなっている要素が存在する場合は、その要素の追加/削除があることを示している。
 
 以下、プロフィールをイメージしたHTMLを使って流れを説明したい。
 
@@ -318,6 +318,8 @@ console.log(result.elm.textContent); // 'World'
 import { init } from 'snabbdom/init';
 import { h } from 'snabbdom/h';
 import { toVNode } from 'snabbdom/tovnode';
+
+const patch = init([]);
 
 const div = toVnode(document.createElement('div'));
 
