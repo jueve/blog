@@ -15,7 +15,7 @@ export default function EntireArticle(props: Record<string, string>): JSX.Elemen
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />;
   }
-  const DMXComponent = dynamic(() => import(`../../_articles/${slug}/index.mdx`));
+  const MDXContent = dynamic(() => import(`../../_articles/${slug}/index.mdx`));
 
   return (
     <>
@@ -26,7 +26,7 @@ export default function EntireArticle(props: Record<string, string>): JSX.Elemen
         <HomeHeader />
         <article>
           <div id="markdown">
-            <DMXComponent />
+            <MDXContent />
           </div>
         </article>
       </div>
