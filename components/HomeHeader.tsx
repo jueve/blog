@@ -10,7 +10,9 @@ export function HomeHeader(): JSX.Element {
             <img className="rounded-full mr-2" src="/assets/profile/icon.png" alt="avatar of cashitsuki" />
           </div>
           <div>
-            <h1 className="text-xl">cashitsuki</h1>
+            <Link href="/">
+              <h1 className="text-xl">cashitsuki</h1>
+            </Link>
           </div>
         </div>
         <div className="flex-1 flex flex-row-reverse">

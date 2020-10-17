@@ -8,7 +8,7 @@ export function Preformatted(props: MDXProviderProps): JSX.Element {
   const newClassName = className + " pt-6 px-6";
   const matches = className.match(/language-(?<lang>.*)/);
   return (
-    <div className="overflow-auto code-preview rounded-md mt-10 mb-10">
+    <div className="overflow-auto code-preview rounded-sm mt-10 mb-10">
       <div>
         <Highlight
           {...defaultProps}
