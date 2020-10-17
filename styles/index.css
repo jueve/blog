@@ -4,10 +4,12 @@
 
 html {
   font-size: 18px;
+  color: #2d3748;
+  background-color: #f7fafc;
 }
 
 #wrapper {
-  max-width: 960px;
+  max-width: 880px;
   margin-bottom: 10rem;
 }
 

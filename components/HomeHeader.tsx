@@ -11,7 +11,9 @@ export function HomeHeader(): JSX.Element {
           </div>
           <div>
             <Link href="/">
-              <h1 className="text-xl">cashitsuki</h1>
+              <a>
+                <h1 className="text-xl">cashitsuki</h1>
+              </a>
             </Link>
           </div>
         </div>
