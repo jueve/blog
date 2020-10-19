@@ -8,7 +8,7 @@ export function Share(articleSummary: ArticleSummary): JSX.Element {
   const titleWithName = `「${articleSummary.title}」by cashitsuki`;
 
   return (
-    <div className="mt-10">
+    <footer className="mt-10">
       <div className="flex">
         <div className="flex-initial mr-2">
           <TwitterShareButton url={page} title={titleWithName}>
@@ -21,6 +21,6 @@ export function Share(articleSummary: ArticleSummary): JSX.Element {
           </FacebookShareButton>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
