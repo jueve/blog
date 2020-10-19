@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 html {
-  font-size: 18px;
+  font-size: 17px;
   color: #2d3748;
-  background-color: #f7fafc;
 }
 
 #wrapper {
-  max-width: 880px;
+  max-width: 42rem;
   margin-bottom: 10rem;
 }
 
