@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function HomeHeader(): JSX.Element {
   return (
-    <div className="mb-20 py-6">
+    <div className="mb-20 mt-8 py-6">
       <div className="flex">
         <div className="flex-1 flex">
           <div>
@@ -20,12 +20,12 @@ export function HomeHeader(): JSX.Element {
         <div className="flex-1 flex flex-row-reverse">
           <div className="mr-4">
             <Link href="/about">
-              <a className="text-xl text-blue-700">About</a>
+              <a className="text-xl text-blue-700 underline">About</a>
             </Link>
           </div>
           <div className="mr-4">
             <Link href="/">
-              <a className="text-xl text-blue-700">Home</a>
+              <a className="text-xl text-blue-700 underline">Home</a>
             </Link>
           </div>
         </div>
