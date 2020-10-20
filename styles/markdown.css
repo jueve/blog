@@ -8,10 +8,11 @@
 }
 
 #markdown code {
-  padding: 0.2rem 0.25rem 0.005rem 0.25rem;
+  padding: 0.15rem 0.25rem 0.05rem 0.25rem;
   margin: 0 0.12rem;
   background-color: #e2e8f0 ;
-  border: solid 0.1rem #cbd5e0;
+  border: solid 0.075rem #cbd5e0;
+  border-radius: 0.25rem;
   font-size: 0.9rem;
 }
 
