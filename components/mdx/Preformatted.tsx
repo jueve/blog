@@ -5,7 +5,7 @@ import theme from "prism-react-renderer/themes/nightOwl";
 
 export function Preformatted(props: MDXProviderProps): JSX.Element {
   const className = props.children.props.className || "";
-  const newClassName = className + " pt-6 px-6";
+  const newClassName = className + " pt-6 px-6 text-sm";
   const matches = className.match(/language-(?<lang>.*)/);
   return (
     <div className="overflow-auto code-preview rounded-sm mt-10 mb-10">
